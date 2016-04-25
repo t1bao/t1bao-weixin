@@ -6,6 +6,9 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var request = require('supertest');
 
+var Waterline = require('waterline');
+var sailsMemoryAdapter = require('sails-memory');
+var waterline = new Waterline();
 
 var http = express();
 http.use(bodyParser.urlencoded({
