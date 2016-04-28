@@ -17,7 +17,7 @@ var config = {
 };
 
 module.exports = {
-  init: function(next) {
+  init: function __init(next) {
     serverModels.init(config, {connection: 'default'}, next);
   }
-}
+};
