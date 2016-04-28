@@ -9,20 +9,7 @@ var uploader = require('./config/uploader');
 var assert = require('assert');
 var serverWeixin = require('../lib');
 var orderMethods = {};
-var conf = {
-  app: {
-    id: '1'
-  },
-  urls: {
-    oauth: {
-      success: 'http://loclahost'
-    }
-  },
-  oauth: {
-    state: 'STATE',
-    scope: 0
-  }
-};
+
 var service = require('./SettingsService');
 
 var wx = {
@@ -35,25 +22,40 @@ describe('server-weixin', function() {
   });
 });
 
+var conf = require('./conf');
+
+var gModels = null;
+
 describe('Oauth', function() {
-  it('should be accessed', function(done) {
+  it('should init models and settings', function(done) {
     var oauth = require('../lib/oauth/callbacks');
-    done();
+
     function main(models) {
-      done();
+      gModels = models;
       var storage = service(models);
       var settings = serverWeixin.getSettings(storage);
-      settings.set(0, conf);
-      serverWeixin.init(settings, http, models, uploader, orderMethods);
-      done();
-      // var url = '/weixin/api/oauth/access';
-      // request(http)
-      //   .get(url)
-      //   .expect(302)
-      //   .end(done);
+      conf(settings, 0, function(error) {
+        assert(!error);
+        serverWeixin.init(settings, http, models, uploader, orderMethods);
+        done();
+      });
     }
     Models.init(main);
   });
+  it('should be accessed', function(done) {
+    var url = '/weixin/api/oauth/access';
+    request(http)
+      .get(url)
+      .expect(302)
+      .end(done);
+  });
+
+  it('should be successful', function() {
+    var oauth = require('../lib/oauth/callbacks');
+    var cb = oauth.onOAuthSuccess(gModels, uploader);
+    cb({}, {}, wx);
+  });
+
   //
   // it('should be successful', function() {
   //   var oauth = require('../lib/oauth/callbacks');
