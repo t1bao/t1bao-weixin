@@ -1,4 +1,4 @@
-module.exports.uploader = {
+module.exports = {
   type: 'oss',
   config: {
     accessKeyId: process.env.ALIYUN_OSS_ACCESS_KEY_ID,
@@ -9,4 +9,3 @@ module.exports.uploader = {
     base: process.env.ALIYUN_OSS_BASE
   }
 };
-

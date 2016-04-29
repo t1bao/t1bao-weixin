@@ -1,4 +1,6 @@
-var _ = require("lodash");
+/* eslint space-before-function-paren: 0 */
+
+var _ = require('lodash');
 module.exports = function(models) {
   return {
     set: function(key, config, cb) {

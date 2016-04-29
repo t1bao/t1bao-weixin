@@ -1,7 +1,7 @@
 'use strict';
 /* eslint space-before-function-paren: 0 */
 
-var http = require('./app')
+var http = require('./app');
 var Models = require('./models');
 var request = require('supertest');
 var uploader = require('./config/uploader');
@@ -13,7 +13,14 @@ var orderMethods = {};
 var service = require('./SettingsService');
 
 var wx = {
-  openid: 'sdfsfdf'
+  openid: 'sdfsfdf',
+  nickname: 'dsfsdf',
+  unionid: 'dsfsf',
+  sex: 1,
+  province: 'sdfsf',
+  city: 'sdfsf',
+  country: 'sdfs',
+  headimgurl: 'http://wx.qlogo.cn/mmopen/Sjp7oYYCibI4LadRszpJvlLUlC1nhdoMGKMiacjn7vcTThnW4Y35jfMth66nStXATia40uB2Y2Ticdn92V2FtUgLtQ/0'
 };
 
 describe('server-weixin', function() {
@@ -28,7 +35,7 @@ var gModels = null;
 
 describe('Oauth', function() {
   it('should init models and settings', function(done) {
-    var oauth = require('../lib/oauth/callbacks');
+    // var oauth = require('../lib/oauth/callbacks');
 
     function main(models) {
       gModels = models;
@@ -50,10 +57,54 @@ describe('Oauth', function() {
       .end(done);
   });
 
-  it('should be successful', function() {
+  it('should be successful', function(done) {
     var oauth = require('../lib/oauth/callbacks');
     var cb = oauth.onOAuthSuccess(gModels, uploader);
-    cb({}, {}, wx);
+    cb({
+      session: {
+        save: function(next) {
+          next(false);
+        },
+        refer: 'sfdsdf'
+      }
+    }, {
+      render: function(file, options) {
+        console.log(file, options);
+        done();
+      }
+    }, wx);
+  });
+
+  it('should be successful', function(done) {
+    var oauth = require('../lib/oauth/callbacks');
+    var cb = oauth.onOAuthSuccess(gModels, uploader);
+    cb({
+      session: {
+        save: function(next) {
+          next(false);
+        }
+      }
+    }, {
+      end: function() {
+        done();
+      }
+    }, wx);
+  });
+
+  it('should be successful', function(done) {
+    var oauth = require('../lib/oauth/callbacks');
+    var cb = oauth.onOAuthSuccess(gModels, uploader);
+    cb({
+      session: {
+        save: function(next) {
+          next(true);
+        }
+      }
+    }, {
+      errorize: function() {
+        done();
+      }
+    }, wx);
   });
 
   //

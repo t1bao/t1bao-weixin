@@ -1,3 +1,5 @@
+/* eslint space-before-function-paren: 0 */
+
 var async = require('async');
 
 var conf = {
@@ -19,15 +21,15 @@ module.exports = function(settings, id, next) {
   var keys = Object.keys(conf);
   async.eachSeries(keys, function iteratee(key, cb) {
     settings.set(id, key, conf[key], function() {
-      cb(null)
+      cb(null);
     });
   }, function endOfIteratee(err) {
-    settings.all(id, function(data) {
+    settings.all(id, function() {
       if (err) {
         console.error(err);
         next(true);
       } else {
-        next(false)
+        next(false);
       }
     });
   });
