@@ -23,17 +23,14 @@ var wx = {
   headimgurl: 'http://wx.qlogo.cn/mmopen/Sjp7oYYCibI4LadRszpJvlLUlC1nhdoMGKMiacjn7vcTThnW4Y35jfMth66nStXATia40uB2Y2Ticdn92V2FtUgLtQ/0'
 };
 
-describe('server-weixin', function() {
-  it('should init weixin', function() {
-    assert(true);
-  });
-});
-
 var conf = require('./conf');
 
 var gModels = null;
 
-describe('Oauth', function() {
+describe('server-weixin', function() {
+  it('should init weixin', function() {
+    assert(true);
+  });
   it('should init models and settings', function(done) {
     // var oauth = require('../lib/oauth/callbacks');
 
@@ -49,6 +46,9 @@ describe('Oauth', function() {
     }
     Models.init(main);
   });
+});
+
+describe('Oauth', function() {
   it('should be accessed', function(done) {
     var url = '/weixin/api/oauth/access';
     request(http)
@@ -105,6 +105,24 @@ describe('Oauth', function() {
         done();
       }
     }, wx);
+  });
+
+  it('should test oauth error', function() {
+    var onError = require('../lib/oauth/onError');
+    var catched = false;
+    try {
+      onError(new Error());
+    } catch (e) {
+      catched = true;
+    }
+    assert(catched);
+  });
+
+  it('should test oauth weixin', function() {
+    var weixin = require('../lib/oauth/weixin').makeSure(gModels, wx);
+    var obj = weixin({openid: 'sdfosodf'});
+
+    assert(obj.then instanceof Function);
   });
 
   //
