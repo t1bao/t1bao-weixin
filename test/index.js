@@ -63,6 +63,13 @@ describe('Oauth', function() {
     cb({
       session: {
         save: function(next) {
+          console.log(this.weixin);
+          console.log(this.customer);
+          assert(this.weixin);
+          assert(this.weixin.user);
+          assert.equal(this.weixin.weixin.openid, wx.openid);
+          assert.equal(this.weixin.weixin.unionid, wx.unionid);
+          assert(this.customer);
           next(false);
         },
         refer: 'sfdsdf'
@@ -122,6 +129,33 @@ describe('Oauth', function() {
     var weixin = require('../lib/oauth/weixin').makeSure(gModels, wx);
     var obj = weixin({openid: 'sdfosodf'});
 
+    assert(obj.then instanceof Function);
+  });
+
+  it('should test oauth user', function(done) {
+    var value = 'sdfsfd';
+    var user = require('../lib/oauth/user').onSaveAvatar(function() {
+
+    }, function(data) {
+      assert(data === value);
+      done();
+    });
+    user(true, value);
+  });
+
+  it('should test oauth user', function(done) {
+    var value = 'sdfsfd';
+    var user = require('../lib/oauth/user')._onSaveWithExtra(function() {
+    }, function(data) {
+      assert(data === true);
+      done();
+    }, value);
+    user(true);
+  });
+
+  it('should test oauth makeSure', function() {
+    var user = require('../lib/oauth/user').makeSure(gModels, wx, uploader);
+    var obj = user(wx);
     assert(obj.then instanceof Function);
   });
 
