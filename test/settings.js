@@ -1,8 +1,8 @@
 /* eslint space-before-function-paren: 0 */
 
 var assert = require('assert');
-// var request = require('supertest');
-// var http = require('./app');
+var request = require('supertest');
+var http = require('./app');
 module.exports = function(getStorage) {
   describe('Settings', function() {
     var settings = require('../lib/settings');
@@ -91,5 +91,28 @@ module.exports = function(getStorage) {
       }
       assert(checked);
     });
+
+    function settingFunc(key, prefix, config) {
+      it('should set settings at ' + prefix, function(done) {
+        var url = prefix + key;
+        request(http)
+          .post(url)
+          .send(config[key])
+          .expect(200)
+          .end(function(err) {
+            // console.log(err, res);
+            assert(!err);
+            done();
+          });
+      });
+    }
+    var config = require('./config/settings');
+
+    for (var k in config) {
+      if (typeof k === 'string') {
+        settingFunc(k, '/grocery/weixin/config/', config);
+        settingFunc(k, '/admin/weixin/config/', config);
+      }
+    }
   });
 };

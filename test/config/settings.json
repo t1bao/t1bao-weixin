@@ -1,0 +1,40 @@
+{
+  "app": {
+    "id": "wx0cf777e00460d938",
+    "secret": "4d8bcffcfc12909bbeb69a3af66e3fa5",
+    "token": "c9be82f386afdb214b0285e96cb9cb82"
+  },
+  "oauth": {
+    "state": "STATE",
+    "scope": "1"
+  },
+  "message": {
+    "aes": "ssosos"
+  },
+  "urls": {
+    "base": {
+      "url": "http://api.t1bao.com/weixin/api"
+    },
+    "auth": {
+      "ack": "http://api.t1bao.com/weixin/api/auth/ack"
+    },
+    "jssdk": {
+      "config": "http://api.t1bao.com/weixin/api/jssdk/config"
+    },
+    "oauth": {
+      "access": "http://api.t1bao.com/weixin/api/oauth/access",
+      "success": "http://api.t1bao.com/weixin/api/oauth/success"
+    },
+    "pay": {
+      "callback": "http://api.t1bao.com/weixin/api/pay/callback"
+    }
+  },
+  "server": {
+    "host": "api.t1bao.com",
+    "prefix": "weixin/api/"
+  },
+  "merchant": {
+    "id": "1243556002",
+    "key": "a111111111111111111111111111111a"
+  }
+}

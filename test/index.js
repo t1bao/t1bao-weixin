@@ -58,3 +58,4 @@ function getStorage() {
   return storage;
 }
 require('./settings')(getStorage);
+require('./pay')();
