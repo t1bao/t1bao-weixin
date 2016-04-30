@@ -2,11 +2,11 @@
 /* eslint space-before-function-paren: 0 */
 
 var http = require('./app');
-var Models = require('./models');
-var request = require('supertest');
-var uploader = require('./config/uploader');
-
+// var request = require('supertest');
 var assert = require('assert');
+
+var Models = require('./models');
+var uploader = require('./config/uploader');
 var serverWeixin = require('../lib');
 var orderMethods = {};
 
@@ -28,9 +28,6 @@ var conf = require('./conf');
 var gModels = null;
 
 describe('server-weixin', function() {
-  it('should init weixin', function() {
-    assert(true);
-  });
   it('should init models and settings', function(done) {
     // var oauth = require('../lib/oauth/callbacks');
 
@@ -48,141 +45,9 @@ describe('server-weixin', function() {
   });
 });
 
-describe('Oauth', function() {
-  it('should be accessed', function(done) {
-    var url = '/weixin/api/oauth/access';
-    request(http)
-      .get(url)
-      .expect(302)
-      .end(done);
-  });
+function getModels() {
+  return gModels;
+}
 
-  it('should be successful', function(done) {
-    var oauth = require('../lib/oauth/callbacks');
-    var cb = oauth.onOAuthSuccess(gModels, uploader);
-    cb({
-      session: {
-        save: function(next) {
-          console.log(this.weixin);
-          console.log(this.customer);
-          assert(this.weixin);
-          assert(this.weixin.user);
-          assert.equal(this.weixin.weixin.openid, wx.openid);
-          assert.equal(this.weixin.weixin.unionid, wx.unionid);
-          assert(this.customer);
-          next(false);
-        },
-        refer: 'sfdsdf'
-      }
-    }, {
-      render: function(file, options) {
-        console.log(file, options);
-        done();
-      }
-    }, wx);
-  });
-
-  it('should be successful', function(done) {
-    var oauth = require('../lib/oauth/callbacks');
-    var cb = oauth.onOAuthSuccess(gModels, uploader);
-    cb({
-      session: {
-        save: function(next) {
-          next(false);
-        }
-      }
-    }, {
-      end: function() {
-        done();
-      }
-    }, wx);
-  });
-
-  it('should be successful', function(done) {
-    var oauth = require('../lib/oauth/callbacks');
-    var cb = oauth.onOAuthSuccess(gModels, uploader);
-    cb({
-      session: {
-        save: function(next) {
-          next(true);
-        }
-      }
-    }, {
-      errorize: function() {
-        done();
-      }
-    }, wx);
-  });
-
-  it('should test oauth error', function() {
-    var onError = require('../lib/oauth/onError');
-    var catched = false;
-    try {
-      onError(new Error());
-    } catch (e) {
-      catched = true;
-    }
-    assert(catched);
-  });
-
-  it('should test oauth weixin', function() {
-    var weixin = require('../lib/oauth/weixin').makeSure(gModels, wx);
-    var obj = weixin({openid: 'sdfosodf'});
-
-    assert(obj.then instanceof Function);
-  });
-
-  it('should test oauth user', function(done) {
-    var value = 'sdfsfd';
-    var user = require('../lib/oauth/user').onSaveAvatar(function() {
-
-    }, function(data) {
-      assert(data === value);
-      done();
-    });
-    user(true, value);
-  });
-
-  it('should test oauth user', function(done) {
-    var value = 'sdfsfd';
-    var user = require('../lib/oauth/user')._onSaveWithExtra(function() {
-    }, function(data) {
-      assert(data === true);
-      done();
-    }, value);
-    user(true);
-  });
-
-  it('should test oauth makeSure', function() {
-    var user = require('../lib/oauth/user').makeSure(gModels, wx, uploader);
-    var obj = user(wx);
-    assert(obj.then instanceof Function);
-  });
-
-  //
-  // it('should be successful', function() {
-  //   var oauth = require('../lib/oauth/callbacks');
-  //   function main(models) {
-  //     var storage = service(models);
-  //     var settings = serverWeixin.getSettings(storage);
-  //     serverWeixin.init(settings, http, models, uploader, orderMethods);
-  //     console.log('inside 2');
-  //     var cb = oauth.onOAuthSuccess(models, uploader);
-  //     cb({}, {}, wx);
-  //   }
-  //   Models.init(main);
-  // });
-  //
-  // it('should be successful', function(done) {
-  //   var url = '/weixin/api/oauth/success?code=100';
-  //   request(http)
-  //     .get(url)
-  //     .expect(200)
-  //     .end(function(error, res) {
-  //       console.log(error);
-  //       console.log(res);
-  //       // console.log(res.text);
-  //       done();
-  //     });
-  // });
-});
+var oauth = require('./oauth');
+oauth(getModels, wx, uploader);
