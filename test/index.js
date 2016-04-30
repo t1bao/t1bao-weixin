@@ -26,6 +26,8 @@ var wx = {
 var conf = require('./conf');
 
 var gModels = null;
+var storage = null;
+var settings = null;
 
 describe('server-weixin', function() {
   it('should init models and settings', function(done) {
@@ -33,8 +35,8 @@ describe('server-weixin', function() {
 
     function main(models) {
       gModels = models;
-      var storage = service(models);
-      var settings = serverWeixin.getSettings(storage);
+      storage = service(models);
+      settings = serverWeixin.getSettings(storage);
       conf(settings, 0, function(error) {
         assert(!error);
         serverWeixin.init(settings, http, models, uploader, orderMethods);
@@ -51,3 +53,8 @@ function getModels() {
 
 var oauth = require('./oauth');
 oauth(getModels, wx, uploader);
+
+function getStorage() {
+  return storage;
+}
+require('./settings')(getStorage);

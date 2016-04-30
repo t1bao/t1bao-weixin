@@ -115,32 +115,5 @@ module.exports = function(gModels, wx, uploader) {
       var obj = user(wx);
       assert(obj.then instanceof Function);
     });
-
-    //
-    // it('should be successful', function() {
-    //   var oauth = require('../lib/oauth/callbacks');
-    //   function main(models) {
-    //     var storage = service(models);
-    //     var settings = serverWeixin.getSettings(storage);
-    //     serverWeixin.init(settings, http, models, uploader, orderMethods);
-    //     console.log('inside 2');
-    //     var cb = oauth.onOAuthSuccess(models, uploader);
-    //     cb({}, {}, wx);
-    //   }
-    //   Models.init(main);
-    // });
-    //
-    // it('should be successful', function(done) {
-    //   var url = '/weixin/api/oauth/success?code=100';
-    //   request(http)
-    //     .get(url)
-    //     .expect(200)
-    //     .end(function(error, res) {
-    //       console.log(error);
-    //       console.log(res);
-    //       // console.log(res.text);
-    //       done();
-    //     });
-    // });
   });
 };
