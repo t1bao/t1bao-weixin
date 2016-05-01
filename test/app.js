@@ -14,7 +14,7 @@ http.use(bodyParser.raw({
   type: 'text/xml'
 }));
 http.use(cookieParser());
-http.use(function (req, res, next) {
+http.use(function onErrors(req, res, next) {
   var common = require('errorable-common');
 
   // the errorable library
@@ -43,5 +43,12 @@ http.use(session({
 }));
 // register the template engine
 http.set('view engine', 'ejs');
+
+http.all('/merchant/login', function onMerchantLogin(req, res) {
+  req.session.merchant = {
+    id: 1
+  };
+  res.end();
+});
 
 module.exports = http;

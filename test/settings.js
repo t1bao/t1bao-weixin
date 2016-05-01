@@ -92,12 +92,31 @@ module.exports = function(getStorage) {
       assert(checked);
     });
 
+    var cookies = null;
+
+    it('should login merchant', function(done) {
+      var url = '/merchant/login';
+      request(http)
+        .post(url)
+        .expect(200)
+        .end(function(err, res) {
+          // console.log(err, res);
+          cookies = res.headers['set-cookie']
+            .map(function(r) {
+              return r.replace("; path=/; httponly", "");
+            }).join("; ");
+          assert(!err);
+          done();
+        });
+    });
+
     function settingFunc(key, prefix, config) {
       it('should set settings at ' + prefix, function(done) {
         var url = prefix + key;
-        request(http)
-          .post(url)
-          .send(config[key])
+        var req = request(http)
+          .post(url);
+        req.cookies = cookies;
+        req.send(config[key])
           .expect(200)
           .end(function(err) {
             // console.log(err, res);

@@ -4,7 +4,7 @@
 // var request = require('supertest');
 // var http = require('./app');
 module.exports = function() {
-//   describe('Pay', function() {
+  describe('Pay', function() {
     //
     // it('should set openid', function() {
     //   assert(true);
@@ -20,5 +20,5 @@ module.exports = function() {
     //       done();
     //     });
     // });
-//   });
+  });
 };
