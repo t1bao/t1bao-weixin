@@ -100,7 +100,6 @@ module.exports = function(getStorage) {
         .post(url)
         .expect(200)
         .end(function(err, res) {
-          // console.log(err, res);
           cookies = res.headers['set-cookie']
             .map(function(r) {
               return r.replace("; path=/; httponly", "");
@@ -119,7 +118,6 @@ module.exports = function(getStorage) {
         req.send(config[key])
           .expect(200)
           .end(function(err) {
-            // console.log(err, res);
             assert(!err);
             done();
           });
@@ -131,7 +129,6 @@ module.exports = function(getStorage) {
       if (typeof k === 'string') {
         settingFunc(k, '/grocery/weixin/config/', config);
         settingFunc(k, '/admin/weixin/config/', config);
-
       }
     }
   });

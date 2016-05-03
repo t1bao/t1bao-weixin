@@ -1,11 +1,12 @@
 /* eslint space-before-function-paren: 0 */
+/* eslint camelcase: 0 */
 
 var assert = require('assert');
 var request = require('supertest');
 var http = require('./app');
 var shared = require('./shared');
 
-module.exports = function(getModels, router) {
+module.exports = function(getModels) {
   describe('Pay', function() {
     var cookies = null;
     var order = null;
@@ -16,7 +17,6 @@ module.exports = function(getModels, router) {
         .post(url)
         .expect(200)
         .end(function(err, res) {
-          // console.log(err, res);
           cookies = res.headers['set-cookie']
             .map(function(r) {
               return r.replace("; path=/; httponly", "");
@@ -38,7 +38,7 @@ module.exports = function(getModels, router) {
           no: no,
           summary: '1001',
           delivery_fee: '3'
-        })
+        });
       }).then(function(theOrder) {
         order = theOrder;
         assert(order !== null);
@@ -49,7 +49,7 @@ module.exports = function(getModels, router) {
         assert(order.summary === '1001');
         assert(order.delivery_fee === '3');
         done();
-      })
+      });
     });
 
     it('should be initialized', function(done) {
@@ -61,7 +61,18 @@ module.exports = function(getModels, router) {
         .end(function(err, res) {
           assert(!err);
           assert(res.text.indexOf('田一块订单微信支付') !== -1);
-          // console.log(err, res);
+          done();
+        });
+    });
+
+    it('should fail to be initialized', function(done) {
+      var url = '/pay/weixin/init?no=' + order.no + '&type=JSAPI&url=http://www.qq.com';
+      var req = request(http)
+        .post(url);
+      req.expect(302)
+        .end(function(err, res) {
+          assert(!err);
+          assert(res.headers.location.indexOf('oauth/access') !== -1);
           done();
         });
     });
@@ -71,13 +82,10 @@ module.exports = function(getModels, router) {
       var req = request(http)
         .post(url);
       req.cookies = cookies;
-      req.expect(302)
+      req.expect(200)
         .end(function(err, res) {
           assert(!err);
-          console.log(res.status);
-          console.log(res.text);
-          console.log(res.headers);
-          // console.log(err, res);
+          assert(res.body.name === 'InputInvalid');
           done();
         });
     });

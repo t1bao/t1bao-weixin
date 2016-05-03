@@ -56,8 +56,7 @@ http.all('/merchant/login', function onMerchantLogin(req, res) {
 });
 
 http.all('/session/set', function onSessionSet(req, res) {
-  console.log('inside set');
-  sessions.set(req, 'openid', shared.weixin, function() {
+  sessions.set(req, 'openid', shared.weixin, function on() {
     res.end();
   });
 });
