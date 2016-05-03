@@ -52,7 +52,7 @@ module.exports = function(getModels, router) {
       })
     });
 
-    it('should be accessed', function(done) {
+    it('should be initialized', function(done) {
       var url = '/pay/weixin/init?no=' + order.no + '&type=JSAPI&url=http://www.qq.com';
       var req = request(http)
         .post(url);
@@ -64,6 +64,28 @@ module.exports = function(getModels, router) {
           // console.log(err, res);
           done();
         });
+    });
+
+    it('should be failed due to InputInvalid', function(done) {
+      var url = '/pay/weixin/init?no=' + order.no + '&type=JSAAA&url=http://www.qq.com';
+      var req = request(http)
+        .post(url);
+      req.cookies = cookies;
+      req.expect(302)
+        .end(function(err, res) {
+          assert(!err);
+          console.log(res.status);
+          console.log(res.text);
+          console.log(res.headers);
+          // console.log(err, res);
+          done();
+        });
+    });
+
+    it('should be accessed', function() {
+      var pay = require('../lib/pay');
+      pay._onFailed(true);
+      pay._onFailed(false);
     });
   });
 };
