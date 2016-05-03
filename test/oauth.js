@@ -3,6 +3,7 @@
 var assert = require('assert');
 var request = require('supertest');
 var http = require('./app');
+var shared = require('./shared');
 
 module.exports = function(gModels, wx, uploader) {
   describe('Oauth', function() {
@@ -26,6 +27,8 @@ module.exports = function(gModels, wx, uploader) {
             assert.equal(this.weixin.weixin.openid, wx.openid);
             assert.equal(this.weixin.weixin.unionid, wx.unionid);
             assert(this.customer);
+            shared.user = this.customer;
+            shared.weixin = this.weixin.weixin;
             next(false);
           },
           refer: url

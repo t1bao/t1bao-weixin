@@ -5,6 +5,10 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 
+var sessions = require('../lib/session').get();
+
+var shared = require('./shared');
+
 var http = express();
 http.use(bodyParser.urlencoded({
   extended: false
@@ -49,6 +53,13 @@ http.all('/merchant/login', function onMerchantLogin(req, res) {
     id: 1
   };
   res.end();
+});
+
+http.all('/session/set', function onSessionSet(req, res) {
+  console.log('inside set');
+  sessions.set(req, 'openid', shared.weixin, function() {
+    res.end();
+  });
 });
 
 module.exports = http;

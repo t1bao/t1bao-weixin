@@ -46,6 +46,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "ejs": "^2.4.1",
     "errorable": "^0.3.1",
     "errorable-settings": "0.0.1",
     "image-model-storage": "0.0.2",

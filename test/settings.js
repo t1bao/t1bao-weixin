@@ -131,6 +131,7 @@ module.exports = function(getStorage) {
       if (typeof k === 'string') {
         settingFunc(k, '/grocery/weixin/config/', config);
         settingFunc(k, '/admin/weixin/config/', config);
+
       }
     }
   });
