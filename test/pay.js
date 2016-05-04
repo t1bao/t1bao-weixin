@@ -41,6 +41,7 @@ module.exports = function(getModels) {
         });
       }).then(function(theOrder) {
         order = theOrder;
+        shared.order = order;
         assert(order !== null);
         assert(order.id !== 0);
         assert(order.no === no);

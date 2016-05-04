@@ -59,3 +59,4 @@ function getStorage() {
 }
 require('./settings')(getStorage);
 require('./pay')(getModels);
+require('./order')(getModels, orderMethods);

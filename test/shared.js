@@ -1,4 +1,5 @@
 module.exports = {
   user: null,
-  weixin: null
+  weixin: null,
+  order: null
 };

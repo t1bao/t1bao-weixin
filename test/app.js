@@ -8,6 +8,17 @@ var cookieParser = require('cookie-parser');
 var sessions = require('../lib/session').get();
 
 var shared = require('./shared');
+var common = require('errorable-common');
+
+// the errorable library
+var errorable = require('errorable');
+
+// Get the generator
+var Generator = errorable.Generator;
+
+// Generate the errors
+var errors = new Generator(common, 'zh-CN').errors;
+shared.errors = errors;
 
 var http = express();
 http.use(bodyParser.urlencoded({
@@ -19,17 +30,6 @@ http.use(bodyParser.raw({
 }));
 http.use(cookieParser());
 http.use(function onErrors(req, res, next) {
-  var common = require('errorable-common');
-
-  // the errorable library
-  var errorable = require('errorable');
-
-  // Get the generator
-  var Generator = errorable.Generator;
-
-  // Generate the errors
-  var errors = new Generator(common, 'zh-CN').errors;
-
   // The errorable middleware for express
   var errorableExpress = require('errorable-express');
   var callback = errorableExpress(errors);
