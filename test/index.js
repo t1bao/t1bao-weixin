@@ -10,8 +10,6 @@ var uploader = require('./config/uploader');
 var serverWeixin = require('../lib');
 var orderMethods = {};
 
-var service = require('./SettingsService');
-
 var wx = {
   openid: 'sdfsfdf',
   nickname: 'dsfsdf',
@@ -35,7 +33,7 @@ describe('server-weixin', function() {
 
     function main(models) {
       gModels = models;
-      storage = service(models);
+      storage = serverWeixin.settings.service(models);
       settings = serverWeixin.getSettings(storage);
       conf(settings, 0, function(error) {
         assert(!error);
