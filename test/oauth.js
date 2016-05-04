@@ -5,6 +5,14 @@ var request = require('supertest');
 var http = require('./app');
 var shared = require('./shared');
 
+var _ = require('lodash');
+
+var req = {
+  headers: {},
+  connection: {},
+  ip: '127.0.0.1'
+};
+
 module.exports = function(gModels, wx, uploader) {
   describe('Oauth', function() {
     it('should be accessed', function(done) {
@@ -19,11 +27,12 @@ module.exports = function(gModels, wx, uploader) {
       var oauth = require('../lib/oauth/callbacks');
       var cb = oauth.onOAuthSuccess(gModels(), uploader);
       var url = 'http://test.com';
-      cb({
+      cb(_.extend(req, {
         session: {
           save: function(next) {
             assert(this.weixin);
             assert(this.weixin.user);
+            assert(this.weixin.user.register_ip);
             assert.equal(this.weixin.weixin.openid, wx.openid);
             assert.equal(this.weixin.weixin.unionid, wx.unionid);
             assert(this.customer);
@@ -33,7 +42,7 @@ module.exports = function(gModels, wx, uploader) {
           },
           refer: url
         }
-      }, {
+      }), {
         render: function(file, options) {
           assert(file.indexOf('views/oauth') !== -1);
           assert(options.url === url);
@@ -45,13 +54,13 @@ module.exports = function(gModels, wx, uploader) {
     it('should be successful', function(done) {
       var oauth = require('../lib/oauth/callbacks');
       var cb = oauth.onOAuthSuccess(gModels(), uploader);
-      cb({
+      cb(_.extend(req, {
         session: {
           save: function(next) {
             next(false);
           }
         }
-      }, {
+      }), {
         end: function() {
           done();
         }
@@ -61,13 +70,13 @@ module.exports = function(gModels, wx, uploader) {
     it('should be successful', function(done) {
       var oauth = require('../lib/oauth/callbacks');
       var cb = oauth.onOAuthSuccess(gModels(), uploader);
-      cb({
+      cb(_.extend(req, {
         session: {
           save: function(next) {
             next(true);
           }
         }
-      }, {
+      }), {
         errorize: function() {
           done();
         }
