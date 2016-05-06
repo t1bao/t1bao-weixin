@@ -24,8 +24,7 @@ var req = {
     },
     _order: {
       no: 'no',
-      summary: '1233.03',
-      delivery_fee: '13.23'
+      price: '1233.03',
     }
   }
 };
@@ -57,7 +56,7 @@ module.exports = function(getModels, orderMethods) {
           notify_url: 'sdfdsff',
           body: '田一块订单支付',
           out_trade_no: 'no',
-          total_fee: '124626',
+          total_fee: '123303',
           trade_type: 'JSAPI'
         });
         done();

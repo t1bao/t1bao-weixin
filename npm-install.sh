@@ -1,2 +1,2 @@
 npm install
-npm install server-models-waterline --registry http://npm.t1bao.com
+npm install server-models-waterline --registry https://npm.t1bao.com
