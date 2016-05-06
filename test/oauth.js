@@ -4,6 +4,7 @@ var assert = require('assert');
 var request = require('supertest');
 var http = require('./app');
 var shared = require('./shared');
+var fs = require('fs');
 
 var _ = require('lodash');
 
@@ -44,6 +45,7 @@ module.exports = function(gModels, wx, uploader) {
         }
       }), {
         render: function(file, options) {
+          assert(fs.existsSync(file + '.ejs'));
           assert(file.indexOf('views/oauth') !== -1);
           assert(options.url === url);
           done();
