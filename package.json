@@ -1,6 +1,6 @@
 {
   "name": "server-weixin",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "homepage": "",
   "author": {
@@ -51,7 +51,7 @@
     "errorable-settings": "0.0.1",
     "image-model-storage": "0.0.2",
     "node-form-validator": "^0.6.1",
-    "node-weixin-express-config": "0.0.9",
+    "node-weixin-express-config": "0.0.10",
     "node-weixin-express-session": "0.0.1",
     "node-weixin-router": "^0.5.0"
   }
