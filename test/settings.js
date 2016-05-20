@@ -40,6 +40,54 @@ module.exports = function(getStorage) {
       });
     });
 
+    it('should not get', function(done) {
+      var func = settings._onGet(function(data) {
+        assert.deepEqual(data, {});
+        done();
+      });
+      func(true, null);
+    });
+
+    it('should not get', function(done) {
+      var func = settings._onGet(function(data) {
+        assert.deepEqual(data, {});
+        done();
+      });
+      func(false, null);
+    });
+
+    it('should not get all', function(done) {
+      var func = settings._onAll(function(data) {
+        assert.deepEqual(data, {});
+        done();
+      });
+      func(true, null);
+    });
+
+    it('should not get all 1', function(done) {
+      var func = settings._onAll(function(data) {
+        assert.deepEqual(data, {});
+        done();
+      });
+      func(true, null);
+    });
+
+    it('should not get all 2', function(done) {
+      var func = settings._onAll(function(data) {
+        assert.deepEqual(data, {});
+        done();
+      });
+      func(false, null);
+    });
+
+    it('should not get all 3', function(done) {
+      var func = settings._onAll(function(data) {
+        assert(!data);
+        done();
+      });
+      func(false, {});
+    });
+
     it('should _checkFunction', function() {
       var checked = false;
       try {
