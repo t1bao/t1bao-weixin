@@ -17,6 +17,7 @@
   ],
   "devDependencies": {
     "async": "^2.0.0-rc.3",
+    "cookie-parser": "^1.4.3",
     "errorable-express": "0.0.3",
     "eslint-config-xo": "^0.16.0",
     "eslint-config-xo-space": "^0.12.0",
