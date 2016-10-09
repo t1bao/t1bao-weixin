@@ -1,5 +1,5 @@
 var sailsMemoryAdapter = require('sails-memory');
-var serverModels = require('server-models-waterline');
+var serverModels = require('t1bao-models');
 
 var config = {
   adapters: {

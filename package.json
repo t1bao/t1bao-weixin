@@ -1,6 +1,6 @@
 {
-  "name": "server-weixin",
-  "version": "0.0.8",
+  "name": "t1bao-weixin",
+  "version": "0.0.1",
   "description": "",
   "homepage": "",
   "author": {
@@ -39,7 +39,7 @@
       "mocha": true
     }
   },
-  "repository": "calidion/server-weixin",
+  "repository": "t1bao/t1bao-weixin",
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp"
