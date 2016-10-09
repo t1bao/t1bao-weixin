@@ -52,6 +52,7 @@
     "node-form-validator": "0.6.1",
     "node-weixin-express-config": "0.1.1",
     "node-weixin-express-session": "0.0.1",
-    "node-weixin-router": "0.5.8"
+    "node-weixin-router": "0.5.8",
+    "t1bao-models": "0.0.2"
   }
 }
