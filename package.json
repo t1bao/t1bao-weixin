@@ -50,7 +50,7 @@
     "errorable-settings": "0.0.1",
     "image-model-storage": "0.0.2",
     "node-form-validator": "0.6.1",
-    "node-weixin-express-config": "0.0.11",
+    "node-weixin-express-config": "0.1.1",
     "node-weixin-express-session": "0.0.1",
     "node-weixin-router": "0.5.8"
   }
