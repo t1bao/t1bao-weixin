@@ -18,7 +18,7 @@ var wx = {
   province: 'sdfsf',
   city: 'sdfsf',
   country: 'sdfs',
-  headimgurl: 'http://wx.qlogo.cn/mmopen/Sjp7oYYCibI4LadRszpJvlLUlC1nhdoMGKMiacjn7vcTThnW4Y35jfMth66nStXATia40uB2Y2Ticdn92V2FtUgLtQ/0'
+  headimgurl: 'http://www.t1bao.com/images/logo.png'
 };
 
 var conf = require('./conf');
@@ -27,15 +27,15 @@ var gModels = null;
 var storage = null;
 var settings = null;
 
-describe('server-weixin', function() {
-  it('should init models and settings', function(done) {
+describe('server-weixin', function () {
+  before(function (done) {
     // var oauth = require('../lib/oauth/callbacks');
 
     function main(models) {
       gModels = models;
       storage = serverWeixin.settings.service(models);
       settings = serverWeixin.getSettings(storage);
-      conf(settings, 0, function(error) {
+      conf(settings, 0, function (error) {
         assert(!error);
         serverWeixin.init(settings, http, models, uploader, orderMethods);
         done();
@@ -43,18 +43,17 @@ describe('server-weixin', function() {
     }
     Models.init(main);
   });
+  var oauth = require('./oauth');
+  oauth(getModels, wx, uploader);
+  require('./settings')(getStorage);
+  require('./pay')(getModels);
+  require('./order')(getModels, orderMethods);
 });
 
 function getModels() {
   return gModels;
 }
 
-var oauth = require('./oauth');
-oauth(getModels, wx, uploader);
-
 function getStorage() {
   return storage;
 }
-require('./settings')(getStorage);
-require('./pay')(getModels);
-require('./order')(getModels, orderMethods);

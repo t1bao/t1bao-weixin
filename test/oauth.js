@@ -27,7 +27,7 @@ module.exports = function(gModels, wx, uploader) {
     it('should be successful', function(done) {
       var oauth = require('../lib/oauth/callbacks');
       var cb = oauth.onOAuthSuccess(gModels(), uploader);
-      var url = 'http://test.com';
+      var url = 'http://www.baidu.com';
       cb(_.extend(req, {
         session: {
           save: function(next) {
