@@ -29,24 +29,24 @@ var req = {
   }
 };
 
-module.exports = function(getModels, orderMethods) {
-  orderMethods.userUpdate = function userUpdate(orderId, UserId, type, next) {
+module.exports = function (getModels, orderMethods) {
+  orderMethods.userUpdate = function (orderId, UserId, type, next) {
     next(shared.errors.Success);
   };
 
-  orderMethods.update = function userUpdate(orderId, StoreId, type, next) {
+  orderMethods.update = function (orderId, StoreId, type, next) {
     next(shared.errors.Success);
   };
 
-  describe('Order', function() {
-    it('should have onCreate onNotify', function() {
+  describe('Order', function () {
+    it('should have onCreate onNotify', function () {
       assert(order.onCreate instanceof Function);
       assert(order.onNotify instanceof Function);
     });
 
-    it('should have onCreate', function(done) {
+    it('should have onCreate', function (done) {
       var onCreate = order.onCreate(getModels(), orderMethods);
-      onCreate(req, {}, function(error, data) {
+      onCreate(req, {}, function (error, data) {
         assert(!error);
         assert(new Date(data.time_start).getTime() !== null);
         delete data.time_start;
@@ -63,7 +63,7 @@ module.exports = function(getModels, orderMethods) {
       });
     });
 
-    it('should have onNotify', function(done) {
+    it('should have onNotify', function (done) {
       var data = {
         openid: 'sfdsdf',
         spbill_create_ip: '192.168.0.1',
@@ -77,16 +77,16 @@ module.exports = function(getModels, orderMethods) {
       var onNotify = order.onNotify(models, orderMethods);
       onNotify(false, data, {
         errors: shared.errors
-      }, function() {
+      }, function () {
         done();
       });
     });
-    it('should handle final Error', function() {
+    it('should handle final Error', function () {
       var error = new Error();
       order._onError(error);
     });
 
-    it('should handle find Error', function() {
+    it('should handle find Error', function () {
       var find = order._orderFind();
       var errored = false;
       try {
@@ -97,7 +97,7 @@ module.exports = function(getModels, orderMethods) {
       assert(errored);
     });
 
-    it('should handle find Error', function() {
+    it('should handle find Error', function () {
       var find = order._orderUpdate();
       var errored = false;
       try {
@@ -108,8 +108,10 @@ module.exports = function(getModels, orderMethods) {
       assert(errored);
     });
 
-    it('should handle order updated resolve', function(done) {
-      var find = order._onOrderUpdated({errors: shared.errors}, {}, function(error) {
+    it('should handle order updated resolve', function (done) {
+      var find = order._onOrderUpdated({
+        errors: shared.errors
+      }, {}, function (error) {
         assert(error);
         done();
       });

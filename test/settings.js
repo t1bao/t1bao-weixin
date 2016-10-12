@@ -150,8 +150,8 @@ module.exports = function(getStorage) {
         .end(function(err, res) {
           cookies = res.headers['set-cookie']
             .map(function(r) {
-              return r.replace("; path=/; httponly", "");
-            }).join("; ");
+              return r.replace('; path=/; httponly', '');
+            }).join('; ');
           assert(!err);
           done();
         });

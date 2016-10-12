@@ -29,7 +29,7 @@ http.use(bodyParser.raw({
   type: 'text/xml'
 }));
 http.use(cookieParser());
-http.use(function onErrors(req, res, next) {
+http.use(function (req, res, next) {
   // The errorable middleware for express
   var errorableExpress = require('errorable-express');
   var callback = errorableExpress(errors);
@@ -48,15 +48,15 @@ http.use(session({
 // register the template engine
 http.set('view engine', 'ejs');
 
-http.all('/merchant/login', function onMerchantLogin(req, res) {
-  req.session.merchant = {
+http.all('/merchant/login', function (req, res) {
+  req.session.grocery = {
     id: 1
   };
   res.end();
 });
 
-http.all('/session/set', function onSessionSet(req, res) {
-  sessions.set(req, 'openid', shared.weixin, function on() {
+http.all('/session/set', function (req, res) {
+  sessions.set(req, 'openid', shared.weixin, function () {
     res.end();
   });
 });

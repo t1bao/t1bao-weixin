@@ -37,7 +37,13 @@ describe('server-weixin', function () {
       settings = serverWeixin.getSettings(storage);
       conf(settings, 0, function (error) {
         assert(!error);
-        serverWeixin.init(settings, http, models, uploader, orderMethods);
+        serverWeixin.init({
+          settings: settings,
+          app: http,
+          models: models,
+          uploader: uploader,
+          callbacks: orderMethods
+        });
         done();
       });
     }

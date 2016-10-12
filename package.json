@@ -1,6 +1,6 @@
 {
   "name": "t1bao-weixin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "homepage": "",
   "author": {
@@ -54,7 +54,7 @@
     "ejs": "2.5.2",
     "errorable": "0.4.0",
     "errorable-settings": "0.0.1",
-    "image-model-storage": "0.0.3",
+    "image-model-storage": "0.0.4",
     "node-form-validator": "1.1.0",
     "node-weixin-express-config": "0.1.1",
     "node-weixin-express-session": "0.0.1",
