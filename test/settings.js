@@ -139,6 +139,34 @@ module.exports = function (getStorage, gConfig) {
       assert(checked);
     });
 
+    it('should _onGet', function (done) {
+      var service = require('../lib/settings/service')(gConfig().models);
+      var cb = service._onGet(0, function (error) {
+        assert(error === 'error');
+        done();
+      });
+      cb('error');
+    });
+    it('should _onGet', function (done) {
+      var service = require('../lib/settings/service')(gConfig().models);
+      var cb = service._onGet(0, function (error, found) {
+        console.log(error, found);
+        done();
+      });
+      cb(null, {
+        id: 1
+      });
+    });
+
+    it('should _onGet', function (done) {
+      var service = require('../lib/settings/service')(gConfig().models);
+      var cb = service._onGet(1, function (error, found) {
+        console.log(error, found);
+        done();
+      });
+      cb(null, null);
+    });
+
     var cookies = null;
 
     it('should login merchant', function (done) {
@@ -199,8 +227,15 @@ module.exports = function (getStorage, gConfig) {
       });
       cb(false, null);
     });
-
     it('get onExec 2', function (done) {
+      var getId = require('./../lib/getId');
+      var cb = getId._onExec(function (id) {
+        assert(id === 0);
+        done();
+      });
+      cb(false, null);
+    });
+    it('get onExec 3', function (done) {
       var getId = require('./../lib/getId');
       var cb = getId._onExec(function (id) {
         assert(id === 1);
@@ -212,6 +247,7 @@ module.exports = function (getStorage, gConfig) {
         }
       });
     });
+
     it('get onExec 1', function (done) {
       var getId = require('./../lib/getId');
       var cb = getId.init(gConfig());
