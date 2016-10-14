@@ -1,4 +1,3 @@
-/* eslint space-before-function-paren: 0 */
 /* eslint camelcase: 0 */
 
 var assert = require('assert');

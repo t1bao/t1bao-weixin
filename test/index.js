@@ -26,6 +26,7 @@ var conf = require('./conf');
 var gModels = null;
 var storage = null;
 var settings = null;
+var gConfig = null;
 
 describe('server-weixin', function () {
   before(function (done) {
@@ -37,13 +38,14 @@ describe('server-weixin', function () {
       settings = serverWeixin.getSettings(storage);
       conf(settings, 0, function (error) {
         assert(!error);
-        serverWeixin.init({
+        gConfig = {
           settings: settings,
           app: http,
           models: models,
           uploader: uploader,
           callbacks: orderMethods
-        });
+        };
+        serverWeixin.init(gConfig);
         done();
       });
     }
@@ -51,10 +53,13 @@ describe('server-weixin', function () {
   });
   var oauth = require('./oauth');
   oauth(getModels, wx, uploader);
-  require('./settings')(getStorage);
+  require('./settings')(getStorage, getConfig);
   require('./pay')(getModels);
   require('./order')(getModels, orderMethods);
 });
+function getConfig() {
+  return gConfig;
+}
 
 function getModels() {
   return gModels;
