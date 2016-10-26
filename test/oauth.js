@@ -31,9 +31,10 @@ module.exports = function(gModels, wx, uploader) {
       cb(_.extend(req, {
         session: {
           save: function(next) {
+            console.log(this.weixin.user);
             assert(this.weixin);
             assert(this.weixin.user);
-            assert(this.weixin.user.register_ip);
+            assert(this.weixin.user.registerIp);
             assert.equal(this.weixin.weixin.openid, wx.openid);
             assert.equal(this.weixin.weixin.unionid, wx.unionid);
             assert(this.customer);

@@ -37,7 +37,7 @@ module.exports = function(getModels) {
           user: shared.user.id,
           no: no,
           summary: '1001',
-          delivery_fee: '3'
+          deliveryFee: '3'
         });
       }).then(function(theOrder) {
         order = theOrder;
@@ -48,7 +48,7 @@ module.exports = function(getModels) {
         assert(order.store !== null);
         assert(order.user === shared.user.id);
         assert(order.summary === '1001');
-        assert(order.delivery_fee === '3');
+        assert(order.deliveryFee === '3');
         done();
       });
     });
