@@ -36,7 +36,7 @@ module.exports = function (getStorage, gConfig) {
       func(1, 'app', function (value) {
         assert(value === v);
         done();
-      });
+      }, true);
     });
 
     it('should not get', function (done) {
@@ -163,7 +163,7 @@ module.exports = function (getStorage, gConfig) {
       var service = require('../lib/settings/service')(gConfig().models);
       var cb = service._onGet(1, function (error, found) {
         assert(!error);
-        assert(found);
+        assert(!found);
         done();
       });
       cb(null, null);

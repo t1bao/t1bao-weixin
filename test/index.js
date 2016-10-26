@@ -34,7 +34,7 @@ describe('server-weixin', function () {
 
     function main(models) {
       gModels = models;
-      storage = serverWeixin.settings.service(models);
+      storage = serverWeixin.settings.service(models, 0, 1);
       settings = serverWeixin.getSettings(storage);
       conf(settings, 0, function (error) {
         assert(!error);
