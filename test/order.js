@@ -116,5 +116,67 @@ module.exports = function (getModels, orderMethods) {
       });
       find(true);
     });
+
+    it('should handle _onFail', function (done) {
+      var find = order._onFail(function (error) {
+        assert(!error);
+        done();
+      });
+      find(true);
+    });
+
+    it('should handle _onGetStoreWeixin', function (done) {
+      var find = order._onGetStoreWeixin({}, function (error, data) {
+        console.log(data);
+        assert(!error);
+        assert(data.body);
+        done();
+      });
+      find({
+        name: 'name'
+      });
+    });
+    it('should handle _onGetStoreWeixin', function (done) {
+      var find = order._onGetStoreWeixin({}, function (error, data) {
+        assert(!error);
+        assert(data.body);
+        assert(!data.sub_mch_id);
+        done();
+      });
+      find({
+        name: 'name',
+        weixin: {
+        }
+      });
+    });
+    it('should handle _onGetStoreWeixin', function (done) {
+      var find = order._onGetStoreWeixin({}, function (error, data) {
+        assert(!error);
+        assert(data.body);
+        assert(!data.sub_mch_id);
+        done();
+      });
+      find({
+        name: 'name',
+        weixin: {
+          enable: false
+        }
+      });
+    });
+
+    it('should handle _onGetStoreWeixin', function (done) {
+      var find = order._onGetStoreWeixin({}, function (error, data) {
+        assert(!error);
+        assert(data.body);
+        assert(!data.sub_mch_id);
+        done();
+      });
+      find({
+        name: 'name',
+        weixin: {
+          enable: true
+        }
+      });
+    });
   });
 };
