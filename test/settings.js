@@ -150,7 +150,8 @@ module.exports = function (getStorage, gConfig) {
     it('should _onGet', function (done) {
       var service = require('../lib/settings/service')(gConfig().models);
       var cb = service._onGet(0, function (error, found) {
-        console.log(error, found);
+        assert(!error);
+        assert(found);
         done();
       });
       cb(null, {
@@ -161,7 +162,8 @@ module.exports = function (getStorage, gConfig) {
     it('should _onGet', function (done) {
       var service = require('../lib/settings/service')(gConfig().models);
       var cb = service._onGet(1, function (error, found) {
-        console.log(error, found);
+        assert(!error);
+        assert(found);
         done();
       });
       cb(null, null);
