@@ -24,5 +24,5 @@ Apache-2.0 © [t1bao](www.t1bao.com)
 [travis-url]: https://travis-ci.org/t1bao/t1bao-weixin
 [daviddm-image]: https://david-dm.org/t1bao/t1bao-weixin.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/t1bao/t1bao-weixin
-[coveralls-image]: https://coveralls.io/repos/t1bao/t1bao-weixin/badge.svg
+[coveralls-image]: https://coveralls.io/repos/github/t1bao/t1bao-weixin/badge.svg
 [coveralls-url]: https://coveralls.io/r/t1bao/t1bao-weixin
