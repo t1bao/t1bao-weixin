@@ -32,6 +32,7 @@ module.exports = function(getModels) {
       models.Store.create({
         name: 'sdofsfd'
       }).then(function(store) {
+        console.log(shared);
         return models.Order.create({
           store: store.id,
           user: shared.user.id,
