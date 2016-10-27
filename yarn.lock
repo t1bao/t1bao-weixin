@@ -3354,9 +3354,9 @@ switchback@2.0.1:
   dependencies:
     lodash "3.10.1"
 
-t1bao-models@0.0.3:
-  version "0.0.3"
-  resolved "http://registry.npm.taobao.org/t1bao-models/download/t1bao-models-0.0.3.tgz#1fabaae88df518232185ae4323ebaf0d4fd99ce1"
+t1bao-models@0.0.4:
+  version "0.0.4"
+  resolved "http://registry.npm.taobao.org/t1bao-models/download/t1bao-models-0.0.4.tgz#75a5a2f6622468ab4670ebb7d46f73f80b9b919f"
   dependencies:
     lodash "^4.16.4"
     moment "^2.13.0"
