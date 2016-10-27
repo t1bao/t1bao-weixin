@@ -169,6 +169,26 @@ module.exports = function (getStorage, gConfig) {
       cb(null, null);
     });
 
+    it('should _onGetStoreWeixin', function (done) {
+      var service = require('../lib/settings/service')(gConfig().models);
+      var cb = service._onGetStoreWeixin(1, function (id) {
+        var vid = process.env.T1BAO_WEIXIN_PROVIDER_ID || 0;
+        assert(id === vid);
+        done();
+      });
+      cb(null, null);
+    });
+
+    it('should _onGetStoreWeixin', function (done) {
+      var service = require('../lib/settings/service')(gConfig().models);
+      var cb = service._onGetStoreWeixin(1, function (id) {
+        var vid = process.env.T1BAO_WEIXIN_PROVIDER_ID || 0;
+        assert(id === vid);
+        done();
+      });
+      cb(true, null);
+    });
+
     var cookies = null;
 
     it('should login merchant', function (done) {
