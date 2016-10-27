@@ -170,7 +170,9 @@ module.exports = function (getStorage, gConfig) {
     });
 
     it('should _onGetStoreWeixin', function (done) {
-      var service = require('../lib/settings/service')(gConfig().models);
+      var service = require('../lib/settings/service')(gConfig().models,
+        process.env.T1BAO_WEIXIN_PROVIDER_ID,
+        process.env.T1BAO_WEIXIN_DEFAULT_MERCHANT_ID);
       var cb = service._onGetStoreWeixin(1, function (id) {
         var vid = process.env.T1BAO_WEIXIN_PROVIDER_ID || 0;
         assert(id === vid);
@@ -180,13 +182,55 @@ module.exports = function (getStorage, gConfig) {
     });
 
     it('should _onGetStoreWeixin', function (done) {
-      var service = require('../lib/settings/service')(gConfig().models);
+      var service = require('../lib/settings/service')(gConfig().models,
+        process.env.T1BAO_WEIXIN_PROVIDER_ID,
+        process.env.T1BAO_WEIXIN_DEFAULT_MERCHANT_ID);
       var cb = service._onGetStoreWeixin(1, function (id) {
-        var vid = process.env.T1BAO_WEIXIN_PROVIDER_ID || 0;
-        assert(id === vid);
+        assert(id === process.env.T1BAO_WEIXIN_PROVIDER_ID);
         done();
       });
       cb(true, null);
+    });
+
+    it('should _onGetStoreWeixin', function (done) {
+      var service = require('../lib/settings/service')(gConfig().models,
+        process.env.T1BAO_WEIXIN_PROVIDER_ID,
+        process.env.T1BAO_WEIXIN_DEFAULT_MERCHANT_ID);
+      var cb = service._onGetStoreWeixin(1, function (id) {
+        assert(id === process.env.T1BAO_WEIXIN_DEFAULT_MERCHANT_ID);
+        done();
+      });
+      cb(false, {});
+    });
+
+    it('should _onGetStoreWeixin', function (done) {
+      var service = require('../lib/settings/service')(gConfig().models,
+        process.env.T1BAO_WEIXIN_PROVIDER_ID,
+        process.env.T1BAO_WEIXIN_DEFAULT_MERCHANT_ID);
+      var cb = service._onGetStoreWeixin(201, function (id) {
+        assert(id === 201);
+        done();
+      });
+      cb(false, {
+        weixin: {
+          enable: true
+        }
+      });
+    });
+
+    it('should _onGetStoreWeixin', function (done) {
+      var service = require('../lib/settings/service')(gConfig().models,
+        process.env.T1BAO_WEIXIN_PROVIDER_ID,
+        process.env.T1BAO_WEIXIN_DEFAULT_MERCHANT_ID);
+      var cb = service._onGetStoreWeixin(201, function (id) {
+        assert(id === process.env.T1BAO_WEIXIN_PROVIDER_ID);
+        done();
+      });
+      cb(false, {
+        weixin: {
+          merchantId: '1999333'
+        }
+      });
     });
 
     var cookies = null;

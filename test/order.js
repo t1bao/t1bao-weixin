@@ -127,7 +127,6 @@ module.exports = function (getModels, orderMethods) {
 
     it('should handle _onGetStoreWeixin', function (done) {
       var find = order._onGetStoreWeixin({}, function (error, data) {
-        console.log(data);
         assert(!error);
         assert(data.body);
         done();

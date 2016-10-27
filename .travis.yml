@@ -3,3 +3,7 @@ node_js:
   - v6
   - v5
   - v4
+
+env:
+  - T1BAO_WEIXIN_PROVIDER_ID=0
+  - T1BAO_WEIXIN_DEFAULT_MERCHANT_ID=1
