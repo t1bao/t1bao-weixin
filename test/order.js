@@ -23,7 +23,11 @@ var req = {
     },
     _order: {
       no: 'no',
-      price: '1233.03'
+      price: '1233.03',
+      store: {
+        id: 100,
+        name: 'hello'
+      }
     }
   }
 };
