@@ -28,6 +28,10 @@ var storage = null;
 var settings = null;
 var gConfig = null;
 
+process.env.T1BAO_WEIXIN_DEFAULT_MERCHANT_ID=1;
+process.env.T1BAO_WEIXIN_PROVIDER_ID=0;
+
+
 describe('server-weixin', function () {
   before(function (done) {
     // var oauth = require('../lib/oauth/callbacks');
